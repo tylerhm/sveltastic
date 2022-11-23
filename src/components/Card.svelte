@@ -9,7 +9,7 @@
 <div
   class="flex flex-col justify-start items-start p-4 bg-slate-700 rounded-md"
 >
-  <div class="flex w-full justify-between">
+  <div class="flex w-full justify-between items-center">
     <h1
       class={`font-bold text-2xl ${cardColor}`}
       contenteditable
@@ -18,16 +18,14 @@
       {title}
     </h1>
 
-    <div class="flex flex-col">
-      <select
-        class={`bg-slate-600 rounded-md ${cardColor}`}
-        bind:value={cardColor}
-      >
-        {#each supportedColors as color}
-          <option value={color}>{color.slice(5)}</option>
-        {/each}
-      </select>
-    </div>
+    <select
+      class={`bg-slate-600 rounded-md ${cardColor}`}
+      bind:value={cardColor}
+    >
+      {#each supportedColors as color}
+        <option value={color}>{color.slice(5)}</option>
+      {/each}
+    </select>
   </div>
 
   <div class="w-full" contenteditable bind:innerHTML={body}>
