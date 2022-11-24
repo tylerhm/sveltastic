@@ -19,7 +19,7 @@
     </h1>
 
     <select
-      class={`bg-slate-600 rounded-md ${cardColor}`}
+      class={`bg-slate-600 rounded-md pl-2 ${cardColor}`}
       bind:value={cardColor}
     >
       {#each supportedColors as color}
