@@ -1,11 +1,14 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { card as cards } from '../stores/store';
 
-  export let card;
+  export let uuid: string;
 
   const dispatch = createEventDispatcher();
 
   let supportedColors = ['text-pink', 'text-teal', 'text-red', 'text-green'];
+
+  //$: console.log($cards[uuid].title);
 </script>
 
 <div
@@ -13,15 +16,15 @@
 >
   <div class="flex w-full justify-end items-center">
     <h1
-      class={`font-bold text-2xl mr-auto ${card.color}`}
+      class={`font-bold text-2xl mr-auto ${$cards[uuid].color}`}
       contenteditable
-      bind:innerHTML={card.title}
+      bind:innerHTML={$cards[uuid].title}
     >
-      {card.title}
+      {$cards[uuid].title}
     </h1>
     <select
-      class={`bg-slate-600 rounded-md pl-2 mr-2 ${card.color}`}
-      bind:value={card.color}
+      class={`bg-slate-600 rounded-md pl-2 mr-2 ${$cards[uuid].color}`}
+      bind:value={$cards[uuid].color}
     >
       {#each supportedColors as color}
         <option value={color}>{color.slice(5)}</option>
@@ -30,14 +33,14 @@
     <button
       on:click={() =>
         dispatch('removeCard', {
-          uuid: card.uuid,
+          uuid: $cards[uuid].uuid,
         })}
     >
       <img class="w-3" src="trash-solid.svg" alt="delete" />
     </button>
   </div>
 
-  <div class="w-full" contenteditable bind:innerHTML={card.body}>
-    {card.body}
+  <div class="w-full" contenteditable bind:innerHTML={$cards[uuid].body}>
+    {$cards[uuid].body}
   </div>
 </div>

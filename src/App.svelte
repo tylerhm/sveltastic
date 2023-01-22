@@ -1,28 +1,24 @@
 <script lang="ts">
-  import { v4 as uuidv4 } from 'uuid';
-  import type { Card as CardType } from './components/Card';
-  import Card from './components/Card.svelte';
+  import { v4 as uuidv4 } from "uuid";
+  import Card from "./components/Card.svelte";
+  import { card as cards } from "./stores/store";
 
-  const saveState = () => {
-    localStorage.setItem('state', JSON.stringify(cards));
-  };
-  const getState = () => {
-    return JSON.parse(localStorage.getItem('state') ?? '[]');
-  };
-
-  setInterval(() => {
-    saveState();
-  }, 1000);
-
-  let cards: Array<CardType> = getState();
   const makeCard = () => {
     return {
-      title: 'Card title',
-      body: 'I am a card!',
-      color: 'text-pink',
+      title: "Card title",
+      body: "I am a card!",
+      color: "text-pink",
       uuid: uuidv4(),
     };
   };
+  const removeCard = (uuid: string) => {
+    cards.update((c) => {
+      delete c[uuid];
+      return c;
+    });
+  };
+
+  $: console.log($cards);
 </script>
 
 <svelte:head>
@@ -43,18 +39,13 @@
     <button
       class="bg-rose-300 text-gray-800 rounded px-2 mb-2"
       on:click={() => {
-        cards = [...cards, makeCard()];
+        const card = makeCard();
+        $cards[card.uuid] = card;
       }}>+</button
     >
-    {#each cards as card, index}
+    {#each Object.values($cards) as { uuid }}
       <div class="mb-2">
-        <Card
-          on:removeCard={() => {
-            cards.splice(index, 1);
-            cards = cards;
-          }}
-          {card}
-        />
+        <Card on:removeCard={() => removeCard(uuid)} {uuid} />
       </div>
     {/each}
   </div>
