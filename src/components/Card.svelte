@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { card as cards } from '../stores/store';
+  import { cards } from '../stores/store';
 
   export let uuid: string;
 
