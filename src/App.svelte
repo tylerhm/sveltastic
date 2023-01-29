@@ -27,7 +27,7 @@
 </svelte:head>
 
 <main class="h-screen bg-base text-text">
-  <div class="w-1/3 h-40 p-10">
+  <div class="w-[400px] h-40 p-10">
     <button
       class="bg-rose-300 text-gray-800 rounded px-2 mb-2"
       on:click={() => {

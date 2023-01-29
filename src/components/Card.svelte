@@ -23,7 +23,7 @@
 >
   <div class="flex w-full justify-end items-center">
     <h1
-      class={`font-bold text-2xl mr-auto ${$cards[uuid].color}`}
+      class={`font-bold text-2xl mr-auto w-[60%] ${$cards[uuid].color}`}
       contenteditable
       bind:innerHTML={$cards[uuid].title}
     >

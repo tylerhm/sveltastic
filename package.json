@@ -11,6 +11,7 @@
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.1",
     "@sveltejs/vite-plugin-svelte": "^2.0.2",
+    "@types/uuid": "^9.0.0",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
     "postcss-load-config": "^4.0.1",
