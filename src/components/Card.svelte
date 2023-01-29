@@ -1,3 +1,12 @@
+<script context="module" lang="ts">
+  export interface Card {
+    title: string;
+    body: string;
+    color: string;
+    uuid: string;
+  }
+</script>
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { cards } from '../stores/store';
@@ -7,8 +16,6 @@
   const dispatch = createEventDispatcher();
 
   let supportedColors = ['text-pink', 'text-teal', 'text-red', 'text-green'];
-
-  //$: console.log($cards[uuid].title);
 </script>
 
 <div

@@ -1,18 +1,16 @@
 <script lang="ts">
-  import { v4 as uuidv4 } from "uuid";
-  import Card from "./components/Card.svelte";
-  import { cards, isSaving } from "./stores/store";
+  import { v4 as uuidv4 } from 'uuid';
+  import Card from './components/Card.svelte';
+  import { cards, isSaving } from './stores/store';
 
   const makeCard = () => {
     return {
-      title: "Card title",
-      body: "I am a card!",
-      color: "text-pink",
+      title: 'Card title',
+      body: 'I am a card!',
+      color: 'text-pink',
       uuid: uuidv4(),
     };
   };
-
-  $: console.log($cards);
 </script>
 
 <svelte:head>
@@ -37,7 +35,7 @@
         $cards[card.uuid] = card;
       }}>+</button
     >
-      <div>{$isSaving ? "Saving..." : "Saved!"}</div>
+    <div>{$isSaving ? 'Saving...' : 'Saved!'}</div>
     {#each Object.values($cards) as { uuid }}
       <div class="mb-2">
         <Card on:removeCard={() => cards.removeCard(uuid)} {uuid} />
