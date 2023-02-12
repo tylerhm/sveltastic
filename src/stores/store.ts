@@ -1,8 +1,9 @@
-import { Readable, writable } from 'svelte/store';
-import { Card } from '../components/Card';
+import { browser } from '$app/environment';
+import { type Readable, writable } from 'svelte/store';
+import type { Card } from '../types/Card';
 
 const cardsWritable = writable<Record<string, Card>>(
-  JSON.parse(localStorage.getItem('card') ?? '{}')
+  browser ? JSON.parse(localStorage.getItem('card') ?? '{}') : {}
 );
 
 const isSavingWritable = writable(false);
@@ -23,12 +24,20 @@ export const cards = {
   removeCard,
 };
 
+let firstLoad = true;
 let oldTimeout: NodeJS.Timeout;
 cards.subscribe((value) => {
   clearTimeout(oldTimeout);
-  isSavingWritable.set(true);
-  oldTimeout = setTimeout(() => {
-    localStorage.setItem('card', JSON.stringify(value));
-    isSavingWritable.set(false);
-  }, 1000);
+  if (firstLoad) {
+    firstLoad = false;
+  } else {
+    firstLoad = false;
+    isSavingWritable.set(true);
+    oldTimeout = setTimeout(() => {
+      if (browser) {
+        localStorage.setItem('card', JSON.stringify(value));
+      }
+      isSavingWritable.set(false);
+    }, 1000);
+  }
 });

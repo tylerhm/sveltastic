@@ -1,7 +1,7 @@
 <script lang="ts">
   import { v4 as uuidv4 } from 'uuid';
-  import Card from './components/Card.svelte';
-  import { cards, isSaving } from './stores/store';
+  import Card from '../components/Card.svelte';
+  import { cards, isSaving } from '../stores/store';
 
   const makeCard = () => {
     return {
